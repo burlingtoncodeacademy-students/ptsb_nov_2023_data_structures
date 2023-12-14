@@ -65,9 +65,9 @@ console.log(theSimpsons);
 ?    Object.freeze()
 */
 
-Object.freeze(theSimpsons);
+Object.freeze(theSimpsons); // Freezing the object in it's place
 
-theSimpsons.id = 2;
-theSimpsons.est = 459875937894;
+theSimpsons.id = 2; //! Will not work since obj is 'frozen'
+theSimpsons.est = 459875937894; //! Will not work since obj is 'frozen'
 
-console.log(theSimpsons);
+console.log(theSimpsons); // Obj remains the same as it was
