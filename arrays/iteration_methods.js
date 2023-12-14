@@ -133,8 +133,17 @@ numArray.map((x) => {
     fizzBuzzArray.push(x);
   }
 });
-
 console.log(fizzBuzzArray);
+
+let newArr = numArray.map((i) => {
+  if (i % 15 === 0) {
+    return `${i} is divisible by 3 and 5`;
+  } else {
+    return `${i} is NOT divisible by 3 and 5`;
+  }
+});
+
+console.log(newArr);
 
 /*
   Using a method, flip the values in an array

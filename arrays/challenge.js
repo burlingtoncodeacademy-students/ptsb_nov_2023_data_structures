@@ -52,7 +52,7 @@ const presidents = [
         // - Deceased Presidents?
         // - Using a forEach loop through the presidents and have it console.log() first name, last name was XX years old when they died. 
         // - We only want the dead presidents to be displayed.
-    */
+*/
 
 console.log(presidents.length); // 45
 
