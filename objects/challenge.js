@@ -5,8 +5,8 @@
     // - This object will have 3 main keys:
         // - id, movies, and shows.
     // - id will simply be an integer.
-    - movies will be an array of objects that represent individual movies. - DONE
-        These objects will have:
+    // - movies will be an array of objects that represent individual movies. - DONE
+        // These objects will have:
                 // - title will be a string
                 // - genre will be an array of strings
                 // - rating will be a string
