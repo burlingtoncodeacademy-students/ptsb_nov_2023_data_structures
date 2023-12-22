@@ -45,3 +45,37 @@ let inventory = {
     },
   },
 };
+
+const interact = (action, target) => {
+  const validItem = inventory[target];
+  const validAction = inventory[target][action];
+  //   console.log({ validAction });
+  if (validAction && typeof validAction === "function") {
+    console.log("Action can be done 👍");
+    if (validItem) {
+      console.log("Item was found 👍");
+      console.log(inventory[target][action]());
+    } else {
+      console.log("Item not found :(");
+    }
+  } else {
+    console.log(`Are you crazy?! You cannot ${action} a ${target}`);
+  }
+};
+
+// interact("drink", "hp_potion");
+
+const start = async () => {
+  try {
+    let response;
+    while (response !== "exit") {
+      response = await ask("What do you want to do?");
+    }
+    process.exit();
+  } catch (err) {
+    console.log(err);
+    await start();
+  }
+};
+
+start();
