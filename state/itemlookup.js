@@ -22,6 +22,10 @@ let inventory = {
       console.log(`${this.name} ⚔️:`);
       return this.description;
     },
+    swing() {
+      // Some other FUNCTIONality -> player attacks a target (would prob pass in a target as a param/arg)
+      return `You swing the ${this.name}`;
+    },
   },
   axe: {
     name: "Mighty Battle Axe Of Doom!",
@@ -46,9 +50,34 @@ let inventory = {
   },
 };
 
+const showInventory = () => {
+  console.log("-----------");
+  console.log("Inventory:");
+  Object.keys(inventory).forEach((item) => {
+    console.log(item + ":", inventory[item].name);
+  });
+  console.log("-----------");
+};
+
 const interact = (action, target) => {
+  if (inventory[action]) {
+    console.log("Available Actions:");
+    Object.keys(inventory[action]).forEach((prop) => {
+      if (typeof inventory[action][prop] === "function") {
+        console.log(prop);
+      }
+    });
+    return;
+  }
+
+  if (validInvCommands.includes(action)) {
+    showInventory();
+    return;
+  }
+
   const validItem = inventory[target];
-  const validAction = inventory[target][action];
+  // const validAction = inventory[target][action]; //! Error on invalid items, - cannot read properties of undefined
+  const validAction = inventory[target]?.[action];
   //   console.log({ validAction });
   if (validAction && typeof validAction === "function") {
     console.log("Action can be done 👍");
@@ -63,13 +92,31 @@ const interact = (action, target) => {
   }
 };
 
-// interact("drink", "hp_potion");
-
 const start = async () => {
   try {
     let response;
     while (response !== "exit") {
       response = await ask("What do you want to do?");
+
+      let splitResponse = response.split(" ");
+      // let action = splitResponse[0];
+      // let target = splitResponse[1];
+
+      // console.log(interact(action,target))
+
+      //? OR
+
+      let [action, target] = splitResponse;
+
+      if (action && target) {
+        // User provided 2 word input
+        interact(action, target);
+      } else if (action) {
+        // handle single input
+        interact(action, "");
+      } else {
+        console.log("Yeah, idk what that is...");
+      }
     }
     process.exit();
   } catch (err) {
